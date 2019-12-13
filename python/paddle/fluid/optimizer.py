@@ -649,6 +649,11 @@ class Optimizer(object):
 
         return no_grad_set
 
+    def clear_gradients(self):
+        for p in self._parameter_list:
+            if p.trainable:
+                p.clear_gradient()
+
     @imperative_base.no_grad
     def minimize(self,
                  loss,
